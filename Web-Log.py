@@ -26,7 +26,7 @@ def update_frequency(new_entry, running_count):
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('-rh', '--host', default="localhost:9092")
-  parser.add_argument('-t', '--topic', default="weblog")
+  parser.add_argument('-t', '--topic', default="weblogs")
   args = parser.parse_args()
   print('Starting the process...\n')
   start=datetime.now()
@@ -37,7 +37,7 @@ if __name__ == '__main__':
   parsed = kvs.map(load_row)  
   updated = parsed.updateStateByKey(update_frequency)
   updated2 = updated.map(lambda (k,v): (str(k), v))
-  high_freq = updated2.filter(lambda (k,v): v >= 2)
+  high_freq = updated2.filter(lambda (k,v): v >= 50)
   high_freq.pprint()
   #high_freq.saveAsTextFiles('DDOS_attacker_found_output')
   ssc.start()
