@@ -37,6 +37,7 @@ if __name__ == '__main__':
   parsed = kvs.map(load_row)  
   updated = parsed.updateStateByKey(update_frequency)
   updated2 = updated.map(lambda (k,v): (str(k), v))
+  #criteria to detect DDOS
   high_freq = updated2.filter(lambda (k,v): v >= 50)
   high_freq.pprint()
   #high_freq.saveAsTextFiles('DDOS_attacker_found_output')
