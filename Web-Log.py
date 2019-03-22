@@ -40,7 +40,7 @@ if __name__ == '__main__':
   #criteria to detect DDOS
   high_freq = updated2.filter(lambda (k,v): v >= 50)
   high_freq.pprint()
-  #high_freq.saveAsTextFiles('DDOS_attacker_found_output')
+  high_freq.saveAsTextFiles('DDOS_attacker_found_output')
   ssc.start()
   time.sleep(60)
   ssc.stop()
